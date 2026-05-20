@@ -31,6 +31,19 @@ class UsuarioOut(BaseModel):
     id_tipo: int
     created_at: Optional[datetime.datetime] = None
     model_config = {"from_attributes": True}
+    
+class UsuarioUpdate(BaseModel):
+    nome: Optional[str] = Field(default=None, min_length=2, max_length=100)
+    email: Optional[EmailStr] = None
+    celular: Optional[str] = Field(default=None, min_length=9, max_length=20)
+    senha: Optional[str] = Field(default=None, min_length=6)
+
+class UsuarioUpdateOut(BaseModel):
+    id: int
+    nome: Optional[str] = Field(min_length=2, max_length=100)
+    email: Optional[EmailStr]
+    celular: Optional[str] = Field(min_length=9, max_length=20)
+    model_config = {"from_attributes": True}
 
 class UsuarioLogin(BaseModel):
     email: EmailStr
