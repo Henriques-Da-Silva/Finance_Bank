@@ -89,6 +89,19 @@ class TransacaoOut(BaseModel):
 
 
 # ─── Pagamento detalhes ──────────────────────────────────────────────
+class PagamentoRequest(BaseModel):
+    id_cartao_origem: int
+    valor: decimal.Decimal = Field(gt=0)
+    categoria: PagamentoDetalhesCategoria
+    referencia: Optional[str] = Field(default=None, max_length=100)
+    
+class RecargaRequest(BaseModel):
+    id_cartao_origem: int
+    valor: decimal.Decimal = Field(gt=0)
+    categoria: PagamentoDetalhesCategoria
+    operadora: str = Field(max_length=50)
+    numero_destino: str = Field(max_length=20)
+    
 class PagamentoDetalhesCreate(BaseModel):
     categoria: PagamentoDetalhesCategoria
     operadora: Optional[str] = Field(default=None, max_length=50)
