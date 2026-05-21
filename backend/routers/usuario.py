@@ -3,21 +3,24 @@ from fastapi import APIRouter, Depends, HTTPException
 from schemas import UsuarioCreate, UsuarioOut, UsuarioUpdate, UsuarioUpdateOut
 from models import Usuarios, TiposUsuario
 from database import get_database
+from services.auth_service import get_admin_user, get_current_user
 
 from http import HTTPStatus
 from sqlalchemy.orm import Session
 from argon2 import PasswordHasher as ph
 
-router = APIRouter(prefix="/usuario", tags=["Usuários"])
+router = APIRouter(prefix="/usuarios", tags=["Usuários"])
 
 @router.get("/usuarios", response_model=list[UsuarioOut], status_code=HTTPStatus.OK)
-def Listar_Usuarios(db: Session = Depends(get_database)):
-    usuarios = db.query(Usuarios).all()
-    
-    return usuarios
+def Listar_Usuarios(db: Session = Depends(get_database), usuario: Usuarios = Depends(get_admin_user)):
+    return db.query(Usuarios).all()
+
+@router.get("/me", response_model=UsuarioOut, status_code=HTTPStatus.OK)
+def Pegar_Meu_Usuario(usuario: Usuarios = Depends(get_current_user)):
+    return usuario
 
 @router.get("/{id_usuario}", response_model=UsuarioOut, status_code=HTTPStatus.OK)
-def Pegar_Usuario(id_usuario: int, db: Session = Depends(get_database)):
+def Pegar_Usuario(id_usuario: int, db: Session = Depends(get_database), usuario: Usuarios = Depends(get_admin_user)):
     usuario = db.query(Usuarios).filter(Usuarios.id == id_usuario).first()
     if not usuario:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Usuário não encontrado")
@@ -50,31 +53,26 @@ def Criar_Usuario(usuario: UsuarioCreate, db: Session = Depends(get_database)):
     db.refresh(novo_usuario)
     return novo_usuario
 
-@router.patch("/{id_usuario}", response_model=UsuarioUpdateOut, status_code=HTTPStatus.OK)
-def Atualizar_Usuario(id_usuario: int, usuario: UsuarioUpdate, db: Session = Depends(get_database)):
-    editando = db.query(Usuarios).filter(Usuarios.id == id_usuario).first()
-    
-    if not editando:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Usuário não encontrado")
+@router.patch("/me", response_model=UsuarioUpdateOut, status_code=HTTPStatus.OK)
+def Atualizar_Usuario(usuario_update: UsuarioUpdate, db: Session = Depends(get_database), usuario: Usuarios = Depends(get_current_user)):
+    dados = usuario_update.model_dump(exclude_unset=True)
 
-    dados = usuario.model_dump(exclude_unset=True)
     if "senha" in dados:
         dados["senha"] = ph().hash(dados["senha"])
 
     for campo, valor in dados.items():
-        setattr(editando, campo, valor)
-        
+        setattr(usuario, campo, valor)
+
     db.commit()
-    
-    db.refresh(editando)
-    return editando
+    db.refresh(usuario)
+    return usuario
 
 @router.delete("/{id_usuario}", status_code=HTTPStatus.NO_CONTENT)
-def Deletar_Usuario(id_usuario: int, db: Session = Depends(get_database)):
-    usuario = db.query(Usuarios).filter(Usuarios.id == id_usuario).first()
+def Deletar_Usuario(id_usuario: int, db: Session = Depends(get_database), usuario: Usuarios = Depends(get_admin_user)):
+    encontrado = db.query(Usuarios).filter(Usuarios.id == id_usuario).first()
     
-    if not usuario:
+    if not encontrado:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Usuário não encontrado")
-    
-    db.delete(usuario)
+
+    db.delete(encontrado)
     db.commit()
