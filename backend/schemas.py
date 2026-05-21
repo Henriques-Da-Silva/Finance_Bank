@@ -65,6 +65,9 @@ class CartaoOut(BaseModel):
     created_at: Optional[datetime.datetime] = None
     model_config = {"from_attributes": True}
 
+class CartaoUpdateApelido(BaseModel):
+    apelido: Optional[str] = Field(default=None, max_length=50)
+    
 
 # ─── Transação ───────────────────────────────────────────────────────
 class TransacaoCreate(BaseModel):
