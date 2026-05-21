@@ -107,6 +107,15 @@ class PagamentoDetalhesCreate(BaseModel):
     operadora: Optional[str] = Field(default=None, max_length=50)
     numero_destino: Optional[str] = Field(default=None, max_length=20)
     referencia: Optional[str] = Field(default=None, max_length=100)
+    
+class DepositoRequest(BaseModel):
+    id_cartao_destino: int
+    valor: decimal.Decimal = Field(gt=0)
+
+class TransferenciaRequest(BaseModel):
+    id_cartao_origem: int
+    iban_destino: str
+    valor: decimal.Decimal = Field(gt=0)
 
 class PagamentoDetalhesOut(BaseModel):
     id: int
