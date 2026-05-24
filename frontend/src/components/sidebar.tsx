@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { FiHome, FiCreditCard } from "react-icons/fi";
 import { BiMoneyWithdraw } from "react-icons/bi";
@@ -12,55 +12,56 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ open, onClose }: SidebarProps) {
+  const isActive = location.pathname
 
   return (
     <>
       {open && ( <div className="fixed inset-0 bg-black/40 md:hidden" onClick={onClose} /> )}
 
       <aside className={`fixed md:static left-0 h-screen w-60 bg-surface border-r border-gray-300 transform transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"} overflow-hidden`}>
-        <nav className="flex flex-col gap-2 h-full p-4 overflow-y-auto">
+        <nav className="flex flex-col gap-2 h-full p-4">
           
-          <Link onClick={onClose} to="/dashboard"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/dashboard"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/dashboard" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><FiHome /></p>
             <p>Início</p>
-          </Link>
+          </NavLink>
 
-          <Link onClick={onClose} to="/extrato"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/extrato"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/extrato" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><BiMoneyWithdraw /></p>
             <p>Extrato</p>
-          </Link>
+          </NavLink>
 
-          <Link onClick={onClose} to="/transferir"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/transferir"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/transferir" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><LuSend /></p>
             <p>Transferir</p>
-          </Link>
+          </NavLink>
 
-          <Link onClick={onClose} to="/pagamentos"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/pagamentos"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/pagamentos" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><FiCreditCard /></p>
             <p>Pagamentos</p>
-          </Link>
+          </NavLink>
 
-          <Link onClick={onClose} to="/investimentos"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/investimentos"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/investimentos" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><FaArrowTrendUp /></p>
             <p>Investimentos</p>
-          </Link>
+          </NavLink>
 
-          <Link onClick={onClose} to="/cartoes"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/cartoes"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/cartoes" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><FiCreditCard /></p>
             <p>Cartões</p>
-          </Link>
+          </NavLink>
 
-          <Link onClick={onClose} to="/perfil"
-            className="flex gap-2 items-center px-4 py-3 text-gray-600 rounded-xl hover:bg-gray-300 hover:text-black" >
+          <NavLink onClick={onClose} to="/perfil"
+            className={`flex gap-2 items-center px-4 py-3 rounded-xl ${isActive === "/perfil" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-300 hover:text-black"}`} >
             <p className="text-2xl"><CgProfile /></p>
             <p>Perfil</p>
-          </Link>
+          </NavLink>
 
         </nav>
       </aside>

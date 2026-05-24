@@ -23,8 +23,8 @@ export default function Header({ open, onMenuClick }: HeaderProps) {
                     <button className="md:hidden text-2xl" onClick={onMenuClick}> {!open ? <FiMenu /> : <RiCloseLargeFill />} </button>
 
                     <div className="flex flex-col gap-0">
-                        <h1 className="text-primary text-xl md:text-2xl font-bold">FinanceBank</h1>
-                        <p className="text-gray-500 text-xs md:text-sm">Seu Banco Digital</p>
+                        <h1 className="text-primary text-xl font-bold">FinanceBank</h1>
+                        <p className="text-gray-500 text-xs md:text-md">Seu Banco Digital</p>
                     </div>
                 </div>
 
