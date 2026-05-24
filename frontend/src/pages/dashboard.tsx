@@ -86,11 +86,11 @@ export default function Dashboard() {
                                 <p className="text-red-600 text-sm"> <FiArrowUpRight /> </p>
                             </div>
                             <div>
-                                <p className="text-sm font-medium text-gray-900">Transferência IBAN para Maria Silva</p>
+                                <p className="text-sm font-medium text-gray-900">Transferência para Maria Silva</p>
                                 <p className="text-xs text-gray-500">23/09/2024</p>
                             </div>
                         </div>
-                        <p className="text-sm font-medium text-red-600">KZS 150,00</p>
+                        <p className="text-xs md:text-sm font-medium text-red-600">KZS 150,00</p>
                     </div>
 
                     {/* Transação 2 - Entrada */}
@@ -104,7 +104,7 @@ export default function Dashboard() {
                                 <p className="text-xs text-gray-500">22/09/2024</p>
                             </div>
                         </div>
-                        <p className="text-sm font-medium text-green-600">+KZS 5.500,00</p>
+                        <p className="text-xs md:text-sm font-medium text-green-600">+KZS 5.500,00</p>
                     </div>
 
                     {/* Transação 3 - Saída */}
@@ -118,7 +118,7 @@ export default function Dashboard() {
                                 <p className="text-xs text-gray-500">21/09/2024</p>
                             </div>
                         </div>
-                        <p className="text-sm font-medium text-red-600">KZS 850,00</p>
+                        <p className="text-xs md:text-sm font-medium text-red-600">KZS 850,00</p>
                     </div>
                 </div>
             </div>
