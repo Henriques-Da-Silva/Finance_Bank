@@ -6,7 +6,7 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 export default function Investimento() {
   return (
     <PageBase>
-        <h1>Investimento</h1>
+        <h1 className="text-2xl font-semibold mb-6">Investimentos</h1>
 
         <div className="flex flex-col justify-between gap-10 w-full px-6 py-8 bg-linear-to-b from-green-500 to-teal-600 rounded-2xl text-white">
             <div className="flex justify-between">
