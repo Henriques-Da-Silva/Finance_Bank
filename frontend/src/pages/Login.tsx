@@ -21,8 +21,9 @@ export default function LoginPage() {
     try {
       await login(email, senha)
       navigate("/dashboard")
-    } catch {
+    } catch (err) {
       setErro("E-mail ou senha incorretos")
+      console.error(err)
     } finally {
       setCarregando(false)
     }
