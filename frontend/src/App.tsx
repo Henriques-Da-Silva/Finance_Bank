@@ -8,6 +8,7 @@ import Investimento from "./pages/investimento.tsx";
 import Cartoes from "./pages/cartoes.tsx";
 import Perfil from "./pages/perfil.tsx";
 import HomePage from "./pages/HomePage.tsx";
+import LoginPage from "./pages/Login.tsx";
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/cartoes" element={<Cartoes />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>   
   )
