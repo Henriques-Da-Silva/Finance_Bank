@@ -6,6 +6,7 @@ import Transferir from "./pages/transferir.tsx";
 import Pagamentos from "./pages/pagamentos.tsx";
 import Investimento from "./pages/investimento.tsx";
 import Cartoes from "./pages/cartoes.tsx";
+import Perfil from "./pages/perfil.tsx";
 
 export default function App() {
 
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/pagamentos" element={<Pagamentos />} />
         <Route path="/investimentos" element={<Investimento />} />
         <Route path="/cartoes" element={<Cartoes />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </BrowserRouter>   
   )
