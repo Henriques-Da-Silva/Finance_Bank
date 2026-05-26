@@ -9,6 +9,7 @@ import Cartoes from "./pages/cartoes.tsx";
 import Perfil from "./pages/perfil.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import LoginPage from "./pages/Login.tsx";
+import RegisterPage from "./pages/cadastro.tsx";
 
 export default function App() {
 
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>   
   )
